@@ -73,7 +73,7 @@ class IapClient:
                 "Bad response from application: {!r} / {!r} / {!r}".format(resp.status_code, resp.headers, resp.text)
             )
         else:
-            return resp.text
+            return resp
 
     def _get_google_open_id_connect_token(self, service_account_credentials):
         service_account_jwt = service_account_credentials._make_authorization_grant_assertion()
