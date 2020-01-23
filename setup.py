@@ -9,5 +9,6 @@ setup(
     author_email='ltaniguti@gmail.com',
     license='unlicense',
     packages=['iap_auth'],
+    install_requires=['requests_toolbelt', 'google-auth-oauthlib'],
     zip_safe=False
 )
