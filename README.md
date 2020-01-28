@@ -23,3 +23,4 @@ resp = cli.make_iap_request(url, self.client_id, method=method, **kwargs)
 # resp is a requests.Response object.
 ```
 
+> If running outside Google Cloud Platform you need to specify GOOGLE_APPLICATION_CREDENTIALS to your authorized service account.
