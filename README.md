@@ -6,7 +6,7 @@ This module contains a helper class to make requests to an app running behind a 
 ### Install
 
 ```bash
-pip install git+https://github.com/lmtani/iap-auth.git
+pip install iap-auth
 ```
 
 ### Usage
