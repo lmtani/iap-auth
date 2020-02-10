@@ -23,6 +23,6 @@ jobs:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        echo ${{ github.ref }}
+        sed -i "s/$VERSION$/${{ github.ref }}/g" setup.py
         python setup.py sdist bdist_wheel
-        # twine upload dist/*
+        twine upload dist/*
