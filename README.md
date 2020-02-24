@@ -16,9 +16,13 @@ from iap_auth import IapClient
 
 IAM_SCOPE = 'https://www.googleapis.com/auth/iam'
 OAUTH_TOKEN_URI = 'https://www.googleapis.com/oauth2/v4/token'
+CLIENT_ID = '<your-project-client-id.apps.googleusercontent.com'
+URL = 'https://your-iap-protected-website.com.br'
+METHOD = 'GET'
+kwargs = {}
 
 cli = IapClient(OAUTH_TOKEN_URI, IAM_SCOPE)
-resp = cli.make_iap_request(url, self.client_id, method=method, **kwargs)
+resp = cli.make_iap_request(URL, CLIENT_ID, method=METHOD, **kwargs)
 
 # resp is a requests.Response object.
 ```

@@ -1,3 +1,5 @@
+import jwt
+import time
 import requests
 import google.auth
 import google.auth.iam
@@ -21,6 +23,7 @@ class IapClient:
     def __init__(self, oauth_token_uri, iam_scope):
         self.OAUTH_TOKEN_URI = oauth_token_uri
         self.IAM_SCOPE = iam_scope
+        self._iap_token = None
 
     def make_iap_request(self, url, client_id, method="GET", **kwargs):
         """Makes a request to an application protected by Identity-Aware Proxy.
@@ -58,10 +61,11 @@ class IapClient:
             signer, signer_email, token_uri=self.OAUTH_TOKEN_URI, additional_claims={"target_audience": client_id}
         )
 
-        google_open_id_connect_token = self._get_google_open_id_connect_token(service_account_credentials)
+        if not self._is_token_valid():
+            self._iap_token = self._get_google_open_id_connect_token(service_account_credentials)
 
         resp = requests.request(
-            method, url, headers={"Authorization": "Bearer {}".format(google_open_id_connect_token)}, **kwargs
+            method, url, headers={"Authorization": "Bearer {}".format(self._iap_token)}, **kwargs
         )
         if resp.status_code == 403:
             raise Exception(
@@ -80,8 +84,16 @@ class IapClient:
         request = google.auth.transport.requests.Request()
         body = {
             "assertion": service_account_jwt,
-            "grant_type": google.oauth2._client._JWT_GRANT_TYPE,
+            "grant_type": google.oauth2._client._JWT_GRANT_TYPE
         }
         token_response = google.oauth2._client._token_endpoint_request(request, self.OAUTH_TOKEN_URI, body)
 
         return token_response["id_token"]
+
+    def _is_token_valid(self):
+        if not self._iap_token:
+            return False
+        decoded = jwt.decode(self._iap_token, verify=False)
+        if decoded["exp"] < time.time():
+            return False        
+        return True
