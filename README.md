@@ -16,7 +16,7 @@ from iap_auth import IapClient
 
 IAM_SCOPE = 'https://www.googleapis.com/auth/iam'
 OAUTH_TOKEN_URI = 'https://www.googleapis.com/oauth2/v4/token'
-CLIENT_ID = '<your-project-client-id.apps.googleusercontent.com'
+CLIENT_ID = '<your-project-client-id>.apps.googleusercontent.com'
 URL = 'https://your-iap-protected-website.com.br'
 METHOD = 'GET'
 kwargs = {}
