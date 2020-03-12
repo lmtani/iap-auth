@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setup(
     name='iap-auth',
     version='??VERSION??',
-    description='Perform authentication for Google Cloud Identity Aware Proxy from a service account',
+    description='Performs authentication for Google Cloud Identity Aware Proxy from a service account',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/lmtani/iap-auth',
