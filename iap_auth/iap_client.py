@@ -64,20 +64,10 @@ class IapClient:
         if not self._is_token_valid():
             self._iap_token = self._get_google_open_id_connect_token(service_account_credentials)
 
-        resp = requests.request(
+        return  requests.request(
             method, url, headers={"Authorization": "Bearer {}".format(self._iap_token)}, **kwargs
         )
-        if resp.status_code == 403:
-            raise Exception(
-                "Service account {} does not have permission to "
-                "access the IAP-protected application.".format(signer_email)
-            )
-        elif resp.status_code != 200:
-            raise Exception(
-                "Bad response from application: {!r} / {!r} / {!r}".format(resp.status_code, resp.headers, resp.text)
-            )
-        else:
-            return resp
+
 
     def _get_google_open_id_connect_token(self, service_account_credentials):
         service_account_jwt = service_account_credentials._make_authorization_grant_assertion()
