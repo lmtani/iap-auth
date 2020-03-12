@@ -38,7 +38,7 @@ class IapClient:
                     If no timeout is provided, it is set to 90 by default.
 
         Returns:
-        The page body, or raises an exception if the page couldn't be retrieved.
+        A requests.Responde object or raise exception if credential is not of a Service Account
         """
         if "timeout" not in kwargs:
             kwargs["timeout"] = 90
