@@ -64,18 +64,12 @@ class IapClient:
         if not self._is_token_valid():
             self._iap_token = self._get_google_open_id_connect_token(service_account_credentials)
 
-        return  requests.request(
-            method, url, headers={"Authorization": "Bearer {}".format(self._iap_token)}, **kwargs
-        )
-
+        return requests.request(method, url, headers={"Authorization": "Bearer {}".format(self._iap_token)}, **kwargs)
 
     def _get_google_open_id_connect_token(self, service_account_credentials):
         service_account_jwt = service_account_credentials._make_authorization_grant_assertion()
         request = google.auth.transport.requests.Request()
-        body = {
-            "assertion": service_account_jwt,
-            "grant_type": google.oauth2._client._JWT_GRANT_TYPE
-        }
+        body = {"assertion": service_account_jwt, "grant_type": google.oauth2._client._JWT_GRANT_TYPE}
         token_response = google.oauth2._client._token_endpoint_request(request, self.OAUTH_TOKEN_URI, body)
 
         return token_response["id_token"]
@@ -85,5 +79,5 @@ class IapClient:
             return False
         decoded = jwt.decode(self._iap_token, verify=False)
         if decoded["exp"] < time.time():
-            return False        
+            return False
         return True
