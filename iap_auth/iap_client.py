@@ -1,4 +1,5 @@
 import requests
+from typing import Optional, Dict, Any
 from google.auth.transport.requests import Request
 from google.oauth2 import id_token
 
@@ -17,6 +18,7 @@ class IapClient:
     Args:
         oauth_id: Oauth server client id.
     """
+    decoded_token: Dict[str, Any] = {}
 
     def __init__(self, oauth_id):
         self._oauth_id = oauth_id
@@ -26,7 +28,8 @@ class IapClient:
         if "timeout" not in kwargs:
             kwargs["timeout"] = 90
 
-        if not is_token_valid(self._iap_token):
+        if not is_token_valid(self.decoded_token.get("exp")):
             self._iap_token = id_token.fetch_id_token(Request(), self._oauth_id)
+            self.decoded_token = id_token.verify_oauth2_token(self._iap_token, Request(), self._oauth_id)
 
         return requests.request(method, url, headers={"Authorization": "Bearer {}".format(self._iap_token)}, **kwargs)
