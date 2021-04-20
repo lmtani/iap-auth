@@ -31,7 +31,7 @@ resp = client.make_iap_request(URL, method=METHOD, **kwargs)
 
 #### Authenticating a user account
 
-This way users do not need to have a service account or Google SKD installed. You'll need to [create an OAuth 2.0 client ID](https://cloud.google.com/iap/docs/authentication-howto#authenticating_from_a_desktop_app) and then use this lib as follows:
+This way users do not need to have a service account or Google SDK installed. You'll need to [create an OAuth 2.0 client ID](https://cloud.google.com/iap/docs/authentication-howto#authenticating_from_a_desktop_app) and then use this lib as follows:
 
 ```python
 from iap_auth.user_client import UserAuth, UserIapClient
