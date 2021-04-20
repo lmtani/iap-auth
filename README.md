@@ -36,14 +36,16 @@ This way users do not need to have a service account or Google SKD installed. Yo
 ```python
 from iap_auth.user_client import UserAuth, UserIapClient
 
-OAUTH_ID = "234NNNNN....apps.googleusercontent.com"
-OAUTH_SECRET = "z6dF.....Ys1"
+OAUTH_ID = "<desktop-app-oauth-id>.googleusercontent.com"
+OAUTH_SECRET = "z6..desktop-app-oauth-secret..Ys1"
 KEY_PATH = "/where/to/store/your/user-credentials.json"
-IAP_OAUTH_ID = "987MMMMM....apps.googleusercontent.com"
+IAP_OAUTH_ID = '<your-project-iap-client-id>.apps.googleusercontent.com'
 
 URL = 'https://your-iap-protected-website.com.br'
 
 user_auth = UserAuth(OAUTH_ID, OAUTH_SECRET, KEY_PATH)
 client = UserIapClient(user_auth, IAP_OAUTH_ID)
-resps = client.make_iap_request(URL, method=METHOD)
+resp = client.make_iap_request(URL, method=METHOD)
+
+# resp is a requests.Response object.
 ```
