@@ -64,7 +64,12 @@ def test_user_auth_should_negotiate_new_token_if_existing_one_is_expired(
     user_iap_client.make_iap_request("https://google.com.br")
 
     # Assert
-    expected_id_token_for_audience_call = mock.call('POST', 'https://oauth2.googleapis.com/token', data='{"client_id": "this-is-oauth_client_id", "client_secret": "this-is-oauth_client_secret", "refresh_token": "aaaa", "grant_type": "refresh_token", "audience": "to-this-audience"}', headers={'Content-Type': 'application/json'})
+    expected_id_token_for_audience_call = mock.call(
+        "POST",
+        "https://oauth2.googleapis.com/token",
+        data='{"client_id": "this-is-oauth_client_id", "client_secret": "this-is-oauth_client_secret", "refresh_token": "aaaa", "grant_type": "refresh_token", "audience": "to-this-audience"}',
+        headers={"Content-Type": "application/json"},
+    )
     expected_iap_protected_resource_call = mock.call(
         "GET", "https://google.com.br", headers={"Authorization": "Bearer user-token"}
     )
