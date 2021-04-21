@@ -1,5 +1,7 @@
 # Google IAP authentication ![Upload Python Package](https://github.com/lmtani/iap-auth/workflows/Upload%20Python%20Package/badge.svg?branch=master)
 
+[![codecov](https://codecov.io/gh/lmtani/iap-auth/branch/master/graph/badge.svg)](https://codecov.io/gh/lmtani/iap-auth)
+
 This module contains a helper class to make requests to an app running behind a Google Identity-Aware Proxy. The code was obtained from the Google [Programmatic authentication](https://cloud.google.com/iap/docs/authentication-howto#iap_make_request-python) document.
 
 
