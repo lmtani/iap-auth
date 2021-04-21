@@ -27,5 +27,6 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
         sed -i "s/??VERSION??/${{ steps.get_version.outputs.VERSION }}/g" setup.py
+        sed -i "s/??VERSION??/${{ steps.get_version.outputs.VERSION }}/g" iap_auth/__init__.py
         python setup.py sdist bdist_wheel
         twine upload dist/*
