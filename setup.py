@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='iap-auth',
-    version='??VERSION??',
+    version='0.2.1a1',
     description='Performs authentication for Google Cloud Identity Aware Proxy from a service account',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -14,6 +14,6 @@ setup(
     author_email='ltaniguti@gmail.com',
     license='unlicense',
     packages=['iap_auth'],
-    install_requires=['requests_toolbelt', 'google-auth-oauthlib'],
+    install_requires=['google-auth', 'requests'],
     zip_safe=False
 )
